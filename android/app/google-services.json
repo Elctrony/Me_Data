@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "188507057263",
+    "firebase_url": "https://me-data-a5f1c.firebaseio.com",
+    "project_id": "me-data-a5f1c",
+    "storage_bucket": "me-data-a5f1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188507057263:android:a4ef1e882a44d1d6f6319a",
+        "android_client_info": {
+          "package_name": "com.example.medata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188507057263-77pkj67jkdroi5pq0hrvqddfb91rieht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCueN6Osewrvob_vBeBgwtGhSs3oEPeZPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188507057263-77pkj67jkdroi5pq0hrvqddfb91rieht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
