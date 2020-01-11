@@ -100,19 +100,19 @@ class MySchedule extends StatelessWidget {
                         title: Text(navigationList[index]['title']),
                       ),
                       onTap: () {
-                        if (navigationList[index] == '/profile')
+                        if (navigationList[index]['navy']== '/profile')
                           Navigator.of(context)
                               .push(MaterialPageRoute(
                               builder: (context) => ProfilePage(_id)));
-                        else if (navigationList[index] == '/presriptions')
+                        else if (navigationList[index]['navy'] == '/presriptions')
                           Navigator.of(context)
                               .push(MaterialPageRoute(
                               builder: (context) => MyPrescription(_id)));
-                        else if (navigationList[index] == '/analysis')
+                        else if (navigationList[index]['navy'] == '/analysis')
                           Navigator.of(context)
                               .push(MaterialPageRoute(
                               builder: (context) => MyAnalysis(_id)));
-                        else if (navigationList[index] == '/schedule')
+                        else if (navigationList[index]['navy'] == '/schedule')
                           Navigator.of(context)
                               .push(MaterialPageRoute(
                               builder: (context) => MySchedule(_id)));

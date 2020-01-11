@@ -103,17 +103,21 @@ class MyPrescription extends StatelessWidget {
                         title: Text(navigationList[index]['title']),
                       ),
                       onTap: () {
-                        if (navigationList[index] == '/profile')
-                          Navigator.of(context).push(MaterialPageRoute(
+                        if (navigationList[index]['navy']== '/profile')
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
                               builder: (context) => ProfilePage(_id)));
-                        else if (navigationList[index] == '/presriptions')
-                          Navigator.of(context).push(MaterialPageRoute(
+                        else if (navigationList[index]['navy'] == '/presriptions')
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
                               builder: (context) => MyPrescription(_id)));
-                        else if (navigationList[index] == '/analysis')
-                          Navigator.of(context).push(MaterialPageRoute(
+                        else if (navigationList[index]['navy'] == '/analysis')
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
                               builder: (context) => MyAnalysis(_id)));
-                        else if (navigationList[index] == '/schedule')
-                          Navigator.of(context).push(MaterialPageRoute(
+                        else if (navigationList[index]['navy'] == '/schedule')
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
                               builder: (context) => MySchedule(_id)));
                       },
                     ),
@@ -246,7 +250,7 @@ class MyPrescription extends StatelessWidget {
             builder: (context) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                height: 150,
+                height: 300,
                 color: Colors.transparent,
                 child: Container(
                     decoration: BoxDecoration(
