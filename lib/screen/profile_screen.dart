@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:medata/screen/analysis.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
+
 import 'dart:math' as math;
 
 import 'package:medata/screen/prescription.dart';
@@ -9,8 +10,9 @@ import 'package:medata/screen/schedule.dart';
 
 class ProfilePage extends StatelessWidget {
   final String _id;
+  final Map dataMap;
 
-  ProfilePage(this._id);
+  ProfilePage(this._id, [this.dataMap]);
 
   TextStyle _style() {
     return TextStyle(fontWeight: FontWeight.bold);
@@ -57,14 +59,8 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 3.5,
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 2 / 3,
+                    height: MediaQuery.of(context).size.height / 3.5,
+                    width: MediaQuery.of(context).size.width * 2 / 3,
                     color: Colors.redAccent,
                     child: Padding(
                       child: Align(
@@ -81,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                             Text(
                               data['name'],
                               style:
-                              TextStyle(color: Colors.white, fontSize: 18),
+                                  TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           ],
                         ),
@@ -94,14 +90,8 @@ class ProfilePage extends StatelessWidget {
                     height: 8,
                   ),
                   Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 2 / 3,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 2 / 3,
+                    width: MediaQuery.of(context).size.width * 2 / 3,
+                    height: MediaQuery.of(context).size.height * 2 / 3,
                     child: ListView.builder(
                       itemBuilder: (context, index) {
                         return Card(
@@ -111,21 +101,20 @@ class ProfilePage extends StatelessWidget {
                               title: Text(navigationList[index]['title']),
                             ),
                             onTap: () {
-                              if (navigationList[index]['navy']== '/profile')
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(
+                              if (navigationList[index]['navy'] == '/profile')
+                                Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => ProfilePage(_id)));
-                              else if (navigationList[index]['navy'] == '/presriptions')
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(
+                              else if (navigationList[index]['navy'] ==
+                                  '/presriptions')
+                                Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MyPrescription(_id)));
-                              else if (navigationList[index]['navy'] == '/analysis')
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(
+                              else if (navigationList[index]['navy'] ==
+                                  '/analysis')
+                                Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MyAnalysis(_id)));
-                              else if (navigationList[index]['navy'] == '/schedule')
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(
+                              else if (navigationList[index]['navy'] ==
+                                  '/schedule')
+                                Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MySchedule(_id)));
                             },
                           ),
@@ -223,10 +212,7 @@ class ProfilePage extends StatelessWidget {
             ),
           );
         },
-        future: Firestore.instance
-            .collection('users')
-            .document(_id)
-            .get());
+        future: Firestore.instance.collection('users').document(_id).get());
   }
 }
 
@@ -280,13 +266,34 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    child: Icon(
+                      Icons.view_list,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    onTap: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                  ),
                   Expanded(child: Container()),
                   Text(
                     'My Profile',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
-                  Expanded(child: Container())
+                  Expanded(child: Container()),
+                  InkWell(
+                    child: Icon(Icons.camera_alt),
+                    onTap: () async {
+                      String cameraScanResult = await scanner.scan();
+                      print(cameraScanResult);
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfilePage(cameraScanResult)));
+                    },
+                  )
                 ],
               ),
             ),
